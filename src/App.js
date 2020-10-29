@@ -27,7 +27,12 @@ class App extends React.Component {
 
 
     // SEARCH RESET
-    // if event,target.value.length === 0
+    // console.log(lookUpWord.length)
+    // if (lookUpWord.length === 0) {
+    //   this.setState({
+    //     foodList: [...this.state.foodList]
+    //   })
+    // }
 
     this.state.foodList.forEach(el => {
       console.log(el.name.includes(lookUpWord))
