@@ -4,7 +4,10 @@ import foods from './foods.json';
 import FoodBox from './Foodbox/Foodbox';
 import './App.css';
 
+
 function App() {
+
+ 
   return (
     <div className="App">
 
