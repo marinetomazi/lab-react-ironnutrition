@@ -9,14 +9,14 @@ class FoodBox extends React.Component {
                     <article className="media">
                         <div className="media-left">
                             <figure className="image is-64x64">
-                                <img src={this.props.image} alt="" />
+                                <img src={this.props.food.image} alt="" />
                             </figure>
                         </div>
                         <div className="media-content">
                             <div className="content">
                                 <p>
-                                    <strong>{this.props.name}</strong> <br />
-                                    <small>{this.props.calories}</small>
+                                    <strong>{this.props.food.name}</strong> <br />
+                                    <small>{this.props.food.calories}</small>
                                 </p>
                             </div>
                         </div>

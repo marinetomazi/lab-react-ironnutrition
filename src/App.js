@@ -3,6 +3,7 @@ import 'bulma/css/bulma.css';
 import foods from './foods.json';
 import FoodBox from './Foodbox/Foodbox';
 import AddNewFoods from './Addnewfoods/Addnewfoods';
+import FoodBoxContainer from './FoodBoxContainer.js'
 import './App.css';
 
 
@@ -12,6 +13,7 @@ class App extends React.Component {
   state = {
     foodList: foods.slice(0, 10),
     search: '',
+    filteredItem: []
 
   }
 
@@ -21,44 +23,20 @@ class App extends React.Component {
     })
   }
 
+
   searchBar = (event) => {
-    const lookUpWord = event.target.value
-    const searchResult = []
-
-
-    // SEARCH RESET
-    // console.log(lookUpWord.length)
-    // if (lookUpWord.length === 0) {
-    //   this.setState({
-    //     foodList: [...this.state.foodList]
-    //   })
-    // }
-
-    this.state.foodList.forEach(el => {
-      console.log(el.name.includes(lookUpWord))
-      if (el.name.includes(lookUpWord)) {
-        searchResult.push(el)
-      }
-    })
-    console.log("searchResult===", searchResult)
+    const lookedUpFood = event.target.value;
+    let filteredResult = this.state.foodList.filter(food => food.name.toLowerCase().includes(lookedUpFood.toLowerCase()))
     this.setState({
-      search: lookUpWord,
-      foodList: searchResult
+      filteredItem: filteredResult,
+      search: lookedUpFood
     })
-
-
-
-    // this.state.foodList.slice().filter(food => {
-    //   //food.name doit inclure les lettres dans lookUpWord
-    //   if (food.name.includes(lookUpWord)) {
-    //     return this.setState({
-    //       foodList: 
-    //     })
-    //   }
-    // })
-
-
   }
+
+  // lookedUpWord = (event) => {
+  //   this.setState({ search: event.target.value })
+  // }
+
 
   render() {
     return (
@@ -67,14 +45,8 @@ class App extends React.Component {
         <form>
           <input type="text" name="search" value={this.state.search} onChange={this.searchBar} placeholder="search" />
         </form>
-
         <AddNewFoods addFood={this.fooding} />
-        {this.state.foodList.map((food, index) => {
-          {/* console.log(food) */ }
-          return (
-            <FoodBox {...food} Key={index} />
-          )
-        })}
+        <FoodBoxContainer foodList={this.state.foodList} search={this.searchBar} filteredItem={this.state.filteredItem} />
       </div>
     );
   }
